@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Includes Navbar and Header for Browsing Page-->
+<head>
+    {% include 'navbar.html' %}
+    {% include 'header.html' %}
+    <title> {{ title }} </title>
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+
+<body>
+    <div class="formwrapper">
+        <form method="POST" action="{{ handler_url }}">
+             {{ form.csrf_token }} <!-- Need to include this token - Flask WTForms requires it. -->
+            <div class="form-field">
+                <h2> {{ form.user_name.label }} </h2> {{ form.user_name }}
+                {% if form.user_name.errors or user_name_error_message is not none %}
+                    <ul class="errors">
+                        {% if user_name_error_message is not none %}
+                            <li>
+                                {{ user_name_error_message }}
+                            </li>
+                        {% endif %}
+                        {% for error in form.user_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="form-field">
+                <h2> {{ form.password.label }} </h2> {{ form.password }}
+                {% if form.password.errors or password_error_message is not none %}
+                    <ul class="errors">
+                        {% if password_error_message is not none %}
+                            <li>
+                                 {{ password_error_message }}
+                            </li>
+                        {% endif %}
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            {{ form.submit }}
+        </form>
+    </div>
+</body>
+</html>

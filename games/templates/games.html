@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Includes Navabar and Header for Browsing Page-->
+<head>
+    {% include 'navbar.html' %}
+    {% include 'header.html' %}
+    <title> Game Library </title>
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+
+<body>
+    <div class="navigation-buttons">
+        <!-- First and Previous Buttons-->
+        <div style="float:left">
+            {% if first_game_url is not none %}
+                <button class="button-general first" onclick="location.href='{{ first_game_url }}'">First</button>
+            {% else %}
+                <button class="button-general-disabled first" disabled>First</button>
+            {% endif %}
+
+            {% if prev_game_url is not none %}
+                <button class="button-general previous" onclick="location.href='{{ prev_game_url }}'">Previous</button>
+            {% else %}
+                <button class="button-general-disabled previous" disabled>Previous</button>
+            {% endif %}
+        </div>
+
+        <!-- Next and Last Buttons-->
+        <div style="float:right">
+            {% if next_game_url is not none %}
+                <button class="button-general next" onclick="location.href='{{ next_game_url }}'">Next</button>
+            {% else %}
+                <button class="button-general-disabled next" disabled>Next</button>
+            {% endif %}
+
+            {% if last_game_url is not none %}
+                <button class="button-general last" onclick="location.href='{{ last_game_url }}'">Last</button>
+            {% else %}
+                <button class="button-general-disabled last" disabled>Last</button>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- Displaying the games library-->
+    <div class="game-list">
+
+        <h1> Total {{ genre_name }} Games - {{ num_games }}</h1>
+
+        {% for game in games %}
+        <h2> <a href="/game/{{ game.game_id }}">{{ game.title }}</a></h2>
+        <a href="/game/{{ game.game_id }}"><img src={{game.image_url}} alt="article image"></a>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

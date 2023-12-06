@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'navbar.html' %}
+    {% include 'header.html' %}
+    <title>User Profile</title>
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+<body>
+    <div class="profile">
+    <div class="user-profile">
+        <br>
+        <br>
+        <h1>{{user.username}}'s Profile</h1>
+        <br>
+        <br>
+        <h2>Rated and Reviewed Games</h2>
+        <ul class="profile-list">
+            {% for r in review %}
+                <li>Game name: {{r.game.title}}, Comment: {{r.comment}}, Rating:{{r.rating}}</li>
+            {% endfor %}
+        </ul>
+        <br>
+        <br>
+        <h2>Wishlist</h2>
+        <ul class="profile-list">
+            <br>
+            <br>
+            {% for w in wishlist %}
+                <li><a href="/game/{{ w.game_id }}" class="game_title">{{w.title}}</a>
+                <a href="/game/{{w.game_id}}/remove_from_wishlist" class="delete"> - Delete Game </a> </li>
+                <li><a href="/game/{{ w.game_id }}"><img src={{w.image_url}} alt="wishlist_game_image"></a></li>
+                <br>
+                <br>
+                <br>
+                <br>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+</body>
+</html>

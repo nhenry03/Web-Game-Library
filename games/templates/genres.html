@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Includes Navabar and Header for Browsing Page-->
+<head>
+    {% include 'navbar.html' %}
+    {% include 'header.html' %}
+    <title> Game Genres </title>
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+
+<body>
+<!-- For Loops run through the list of genres then return the button with associated genre name-->
+    <div class="genre-tag">
+        <h1> Genres - {{ genre_numbers }} </h1>
+        <div class="button-grid">
+        {% for genre in genres %}
+            <button class="grid-button" onclick="location.href='{{ genre_urls[genre.genre_name] }}'">{{ genre.genre_name }}</button>
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

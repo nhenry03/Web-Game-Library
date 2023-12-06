@@ -1,0 +1,24 @@
+<nav>
+    <img id="logo" src="../static/logo.jpeg" />
+    <div class="heading">Game Listing</div>
+    <br>
+    <div class="navbar">
+      <ul>
+        <li><a href='/'>Home</a></li>
+          <li><a href=" {{ url_for('profile_bp.profile', user_name=session['user_name']) }} "> My Profile </a></li>
+        <li><a href='/authentication/register'>Register</a></li>
+        <li><a href='/authentication/login'>Log In</a></li>
+
+{% if 'user_name' in session %}
+          <li><a href='/authentication/logout'>Log Out</a></li>
+{% endif %}
+
+        <li><a href='/games'>Library</a></li>
+        <li><a href='/genres'>Genres</a></li>
+        <li><a href='/search'>Search</a></li>
+      </ul>
+    </div>
+    <div id="nav-footer">
+      upi: daun351_yyua590_bugn212
+    </div>
+  </nav>

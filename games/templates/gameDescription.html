@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{ game.title }} </title>
+    <link rel="stylesheet" href="../static/css/main.css">
+    {% include 'navbar.html' %}
+    {% include 'header.html' %}
+</head>
+<body>
+    <h3 id="gameTitle"> {{ game.title }} </h3>
+    <h3 class="wishlist"><a href="/game/{{game.game_id}}/add_to_wishlist"> Add to Wishlist </a></h3>
+    <br>
+    <br>
+    <h3 class="wishlist"><a href="/game/{{game.game_id}}/remove_from_wishlist"> Remove from Wishlist </a></h3>
+    <div id="boxart"><img id = "box" src="{{ game.image_url }}" alt="{{ game.title }} boxart"> </div>
+    <div id="game_details">
+                    <p><i>Release Date:</i> {{ game.release_date }}</p>
+                    <p><i>Price:</i> {{ game.price }}</p>
+                    <p><i>Publishers:</i> {{ publisher }}</p>
+                    <p><i>Genres:</i> {{ genres }}</p>
+                    <p><i>Rating:</i> {{ average }}</p>
+                    <br>
+                    <p><i>About:</i> {{ game.description }} </p>
+    </div>
+    <div id="reviews">
+        {% if reviews is none %}
+                <p><i>No Reviews yet!</i></p>
+            {% endif %}
+        <ul>
+            {% if reviews is not none %}
+            {% for review in reviews %}
+            <li>
+                <p><i> {{ review.user.username }} - {{ review.rating }}</i></p>
+                <p><i> {{ review.comment }}</i></p>
+            </li>
+            {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+    <div id="leave_review">
+        <br>
+            <a href="/review?game_id={{game.game_id}}">Leave a review</a>
+
+    </div>
+</body> 
+</html>

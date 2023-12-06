@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{ game.title }} </title>
+    <link href="./../static/css/main.css" rel="stylesheet" type="text/css"/>
+    {% include 'navbar.html' %}
+    {% include 'header.html' %}
+</head>
+<body>
+<div id="review_box">
+    <form action="/review?game_id={{game.game_id}}" method="post">
+        <p> Rating (1-5)</p>
+        {{ form.csrf_token }}
+        <p> {{ form.rating }} </p>
+        <br>
+        <p> Review </p>
+        <p> {{ form.review(cols="80", rows="30") }} </p>
+        <br>
+        <p> {{ form.submit }} </p>
+    </form>
+    </div>
+</body>
+</html>

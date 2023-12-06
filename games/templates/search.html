@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <title> Game Search </title>
+    <link rel="stylesheet" href="../static/css/main.css">
+
+</head>
+
+<body>
+    <div id="body">
+        {% include 'navbar.html' %}
+        <div id="content-2">
+            {% include 'header.html' %}
+            <h1 class="game-title"> Games Search </h1>
+            <form method="post">
+                <label for="query">Search by Title:</label>
+                <input type="text" id="query" name="query"><br><br>
+
+                <label for="genre">Filter by Genre:</label>
+                <select id="genre" name="genre">
+                    <option value="">--Select Genre--</option>
+                    {% for genre in unique_genres %}
+                        <option value="{{ genre.genre_name }}">{{ genre }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <label for="publisher">Filter by Publisher:</label>
+                <select id="publisher" name="publisher">
+                    <option value="">--Select Publisher--</option>
+                    {% for publisher in unique_publishers %}
+                        <option value="{{ publisher.publisher_name }}">{{ publisher }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <input type="submit" value="Search">
+            </form>
+
+            {% if message %}
+                <div class="message">
+                <p>{{ message }}</p>
+                    </div>
+            {% endif %}
+            
+            {% if search_results %}
+            <div class="search_results">
+                    <h2>Search Results</h2>
+                    <ul>
+                        {% for game in search_results %}
+                            <li><a href="/game/{{ game.game_id }}">{{ game.title }}
+                                - {% for genre in game.genres %} {{ genre.genre_name }}, {% endfor %}
+                                by {{ game.publisher.publisher_name }}
+                            </a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
